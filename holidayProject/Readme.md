@@ -89,7 +89,7 @@ sudo nano index.php
 
 **Method 2 - With a Logical network**
 # Step 1 - Create vpc, subnets, route tables, internet gateway, nat gateway, security groups, bastion host, private instances, and configure the route tables.
-- Set up 2 private EC2 instances on AWS(use the free tier instances).
+
 - Created demovpc with the cidr range of 198.162.0.0/16
 - Created private subnet with cidr range of 192.168.3.0/24
 - created public subnet with cidr range of 192.168.2.0
@@ -100,11 +100,35 @@ sudo nano index.php
 - Created a route in the private route table with the destination of 0.0.0.0/0 and a target of the nat gateway.
 - Created a security group called demoSGnew and added the following rules: inbound (tcp, 22, 0.0.0.0/0 : icmp, all, 0.0.0.0/0) Outbound: all traffic
 
+
+- <img src="images\vpc.JPG" alt="com command" style="height: 400px; width:800px;"/>
+
+- <img src="images\IG.JPG" alt="com command" style="height: 100px; width:800px;"/>
+
+- <img src="images\subnets.JPG" alt="com command" style="height: 400px; width:800px;"/>
+
+- <img src="images\private RT.JPG" alt="com command" style="height: 400px; width:800px;"/>
+
+- <img src="images\publicRT.JPG" alt="com command" style="height: 400px; width:800px;"/>
+
+
+
+
 # Step 2 - Set up Bastion host
 - Create an EC2 instance, assigned to the public subnet, with the security group demoSGnew. Also enable auto assign public Ip
 
+- <img src="images\bastionserver.JPG" alt="com command" style="height: 400px; width:800px;"/>
+
 # Step 3 - Set up Private instance
 - Create an EC2 instance, assigned to the private subnet, with the security group demoSGnew. Disable auto assign public Ip.
+
+- <img src="images\private instances.JPG" alt="com command" style="height: 400px; width:800px;"/>
+
+- <img src="images\server1.JPG" alt="com command" style="height: 400px; width:800px;"/>
+
+- <img src="images\server2.JPG" alt="com command" style="height: 400px; width:800px;"/>
+
+
 
 # Step 4 - Set up Nginx web server on the private instance
 - SSH into the bastion host
@@ -133,6 +157,11 @@ Do the samee for the second private instance.
 
 # step 5 - Set up Load Balancer
 - Create a load balancer and target group targeting the two private instances created at the top
+
+- <img src="images\demoLB.JPG" alt="com command" style="height: 400px; width:800px;"/>
+
+- <img src="images\targetgroup.JPG" alt="com command" style="height: 400px; width:800px;"/>
+
 - Create a listener on port 80 and forward to the target group
 - Create a listener on port 443 and forward to the target group
 
